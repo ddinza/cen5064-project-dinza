@@ -1,15 +1,14 @@
-# [Your Project Name]
+# HookIt
 
 <!-- CI badge: after Session 4, replace ORG/REPO and the workflow filename, then uncomment:
 ![CI](https://github.com/ORG/REPO/actions/workflows/ci.yml/badge.svg)
 -->
 
-**Student:** [Your Name] · **Course:** CEN 5064 Software Design, Fall 2026 · **Partner:** [@partner-github-username]
+**Student:** Dionny Dinza · **Course:** CEN 5064 Software Design, Fall 2026 · **Partner:** [@lfriera92]
 
 ## Project (approval paragraph — write this by Sun Aug 30)
 
-[One paragraph: What is the system? Who is it for? What are its 3–4 core features?
-This paragraph is your approval request — see the Project Brief, Section 2.]
+ HookIt is an iOS fishing companion designed for recreational anglers who want an easy way to plan, identify, and track their fishing activities. The system provides four core features: an AI-powered fish identification tool, a species guide with information on bait and fishing techniques, real-time local fishing conditions including weather, tides, and moon phases, and fishing regulation information. Users can also save favorite species and record their catches to keep their fishing information organized in one application.
 
 ## How to run
 
