@@ -13,9 +13,14 @@
 ## How to run
 
 ```
-[Exact commands to build and run your system from a clean clone.
-Update this every time the steps change — your partner and your
-instructor will follow it literally on conference days.]
+1-Clone the repository:
+git clone https://github.com/ddinza/HookIt.git
+cd HookIt
+2-Open the Xcode project:
+open HookIt.xcodeproj
+3-In Xcode, select an iPhone Simulator as the run destination.
+4-Build and run the application using Product → Run or press ⌘R.
+5-When prompted, allow location access so HookIt can display local weather, tide, and moon information.
 ```
 
 ## Architecture
