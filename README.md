@@ -8,19 +8,44 @@
 
 ## Project (approval paragraph — write this by Sun Aug 30)
 
- HookIt is an iOS fishing companion designed for recreational anglers who want an easy way to plan, identify, and track their fishing activities. The system provides four core features: an AI-powered fish identification tool, a species guide with information on bait and fishing techniques, real-time local fishing conditions including weather, tides, and moon phases, and fishing regulation information. Users can also save favorite species and record their catches to keep their fishing information organized in one application.
+ HookIt is a web application designed for recreational anglers to track their catches while automatically ensuring compliance with local fishing regulations. The system focuses on four core features: (1) a Catch Logger where users digitally record their catches by species and length; (2) a Static Regulations Database built into the system containing regional size limits and open seasons; (3) a Compliance Engine that automatically cross-references a logged catch against the static database to warn the user if a fish is undersized or out of season; and (4) an AI Fish Identification tool utilizing the Gemini API to analyze an uploaded photo and identify the species before the user logs it.
 
 ## How to run
 
-```
-1-Clone the repository:
-git clone https://github.com/ddinza/HookIt.git
-cd HookIt
-2-Open the Xcode project:
-open HookIt.xcodeproj
-3-In Xcode, select an iPhone Simulator as the run destination.
-4-Build and run the application using Product → Run or press ⌘R.
-5-When prompted, allow location access so HookIt can display local weather, tide, and moon information.
+These instructions will run the web application locally. It is designed to work on both Windows and Mac environments.
+
+   **Clone the repository:**
+   ```bash
+   git clone [https://github.com/ddinza/HookIt.git](https://github.com/ddinza/HookIt.git)
+   cd HookIt
+   
+Create and activate a virtual environment:
+
+Windows:
+
+Bash
+python -m venv venv
+venv\Scripts\activate
+Mac:
+
+Bash
+python3 -m venv venv
+source venv/bin/activate
+Install dependencies:
+
+Bash
+pip install -r requirements.txt
+Add the API Key:
+Create a .env file in the main folder.
+(Note for my reviewer: I will message you the temporary GEMINI_API_KEY to paste into this file during review days).
+
+Run the app:
+
+Bash
+python app.py
+View it:
+Open your browser to http://localhost:5000
+
 ```
 
 ## Architecture
