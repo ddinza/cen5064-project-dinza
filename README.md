@@ -8,7 +8,7 @@
 
 ## Project (approval paragraph — write this by Sun Aug 30)
 
- HookIt is a web application designed for recreational anglers to track their catches while automatically ensuring compliance with local fishing regulations. The system focuses on four core features: (1) a Catch Logger where users digitally record their catches by species and length; (2) a Static Regulations Database built into the system containing regional size limits and open seasons; (3) a Compliance Engine that automatically cross-references a logged catch against the static database to warn the user if a fish is undersized or out of season; and (4) an AI Fish Identification tool utilizing the Gemini API to analyze an uploaded photo and identify the species before the user logs it.
+ HookIt is a native iOS application designed for recreational anglers to digitally log their catches while automatically ensuring compliance with local fishing regulations. To maintain a strict scope and clear architectural tiers, the system focuses on four core features: (1) an AI Fish Identification tool—the single permitted external API integration—that analyzes an uploaded photo to identify the species; (2) a Catch Logger where users record their harvest details (species, length, date); (3) a Static Regulations Database built directly into the app containing regional size limits and open seasons, eliminating the need for live weather or tide APIs; and (4) a Compliance Engine (Domain Rule) that automatically cross-references every logged catch against the static database to instantly warn the user if a fish is undersized or out of season.
 
 ## How to run
 
