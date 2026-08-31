@@ -52,12 +52,12 @@ Open your browser to http://localhost:5000
 
 ### Tier breakdown (Session 2 studio)
 
-| Tier | Responsibilities in THIS system |
-|------|--------------------------------|
-| Presentation | [what your UI layer does] |
-| Service | [what your use-case/orchestration layer does] |
-| Domain | [your entities and business rules] |
-| Data | [how and where data is stored] |
+| Tier | Responsibilities in THIS system |Example Classes/Modules|
+|------|--------------------------------|----------------------------|
+| Presentation | Displays the user interface, shows logged catches, collects input for new catches, and alerts the user of regulation violations. |CatchLogView, AddCatchForm, CameraCaptureView|
+| Service | Orchestrates app workflows, such as handling a new catch photo, calling the AI vision integration for identification, requesting a regulation check, and saving the log. |CatchService, IdentificationService|
+| Domain | Defines core fishing entities and enforces the main business rule: validating whether a logged catch violates the static size or season limits for that specific species. |Catch, FishSpecies, RegulationValidator|
+| Data | Handles the storage and retrieval of user catch history as well as loading the static dataset of fishing regulations. |CatchStore (interface), SwiftDataCatchStore, StaticRegulationStore|
 
 ### C4 — Context & Container (Session 3 studio)
 
