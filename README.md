@@ -117,5 +117,5 @@ Decisions live in [`docs/adr/`](docs/adr/). Start with ADR-001 in Session 4.
 
 A one-line note per week keeps your commit story readable:
 
-- Week 1 (Aug 24): repo created, three ideas drafted
-- Week 2 (Aug 31): ...
+- Week 1 (Aug 24): repo created, HookIt core architecture and AI Vision integration drafted
+- Week 2 (Aug 31): implemented local offline services, regulations data provider, and domain-tier validation rule
