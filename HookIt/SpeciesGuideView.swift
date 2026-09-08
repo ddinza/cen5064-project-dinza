@@ -69,26 +69,12 @@ struct SpeciesGuideView: View {
             ),
             prompt: "Search fish species"
         )
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    FavoritesView()
-                } label: {
-                    HStack(spacing: 5) {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.yellow)
-
-                        Text("Favorites")
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.primary)
-                    }
-                }
-            }
-        }
+        // ⬇️ Prevents the bottom fish from hiding behind the nav bar ⬇️
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 90)
         }
     }
-
+}
 
 #Preview {
     NavigationStack {

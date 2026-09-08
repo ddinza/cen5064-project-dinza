@@ -54,6 +54,6 @@ struct SimilarSpeciesView: View {
         SimilarSpeciesView(
             fish: FishData.allFish[0]
         )
-        .environmentObject(FavoritesManager())
+       
     }
 }

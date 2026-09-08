@@ -27,3 +27,4 @@ Thumbs.db
 .env
 *.local
 HookIt/Secrets.plist
+secrets.plist

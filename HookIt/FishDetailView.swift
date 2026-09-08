@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FishDetailView: View {
     let fish: FishSpecies
-    @EnvironmentObject var favoritesManager: FavoritesManager
     
     var body: some View {
         ScrollView {
@@ -111,17 +110,8 @@ struct FishDetailView: View {
         }
         .navigationTitle(fish.name)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            Button {
-                favoritesManager.toggleFavorite(fish)
-            } label: {
-                Image(
-                    systemName: favoritesManager.isFavorite(fish)
-                    ? "star.fill"
-                    : "star"
-                )
-                .foregroundStyle(.yellow)
-            }
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 90)
         }
     }
 }
@@ -215,6 +205,5 @@ struct RegulationLinkButton: View {
                 similarSpecies: ["Tarpon", "Ladyfish", "Redfish"]
             )
         )
-        .environmentObject(FavoritesManager())
     }
 }

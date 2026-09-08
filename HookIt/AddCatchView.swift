@@ -29,6 +29,11 @@ struct AddCatchView: View {
     @State private var selectedImageData: Data?
     @State private var isLoadingPhoto = false
     
+    // MARK: - Regulation Validation State
+    @State private var showRegulationWarning = false
+    @State private var warningTitle = ""
+    @State private var warningMessage = ""
+    
     init(
         initialImageData: Data? = nil,
         initialSpeciesName: String? = nil,
@@ -131,7 +136,7 @@ struct AddCatchView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        saveCatch()
+                        validateAndSave()
                     }
                 }
                 
@@ -144,39 +149,52 @@ struct AddCatchView: View {
             .task(id: selectedPhotoItem) {
                 await loadSelectedPhoto()
             }
+            // MARK: - Business Rule Alert Trigger
+            .alert(warningTitle, isPresented: $showRegulationWarning) {
+                Button("Cancel (Don't Save)", role: .cancel) { }
+                Button("Log Anyway", role: .destructive) {
+                    finalizeSave()
+                }
+            } message: {
+                Text(warningMessage)
+            }
         }
     }
     
-    private func saveCatch() {
-        let trimmedLength = length.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
+    // MARK: - Domain-Tier Business Rule Check
+    private func validateAndSave() {
+        let cleanSpecies = speciesName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let parsedLength = Double(length.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0.0
         
-        let trimmedWeight = weight.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
+        // Convert length to inches for the validation engine if needed
+        let lengthInInches = lengthUnit == "cm" ? (parsedLength * 0.393701) : parsedLength
         
-        let formattedLength = trimmedLength.isEmpty
-            ? "Not provided"
-            : "\(trimmedLength) \(lengthUnit)"
+        let compliance = RegulationValidator.validate(speciesName: cleanSpecies, lengthInches: lengthInInches)
         
-        let formattedWeight = trimmedWeight.isEmpty
-            ? "Not provided"
-            : "\(trimmedWeight) \(weightUnit)"
+        if compliance.isViolation {
+            warningTitle = compliance.warningTitle
+            warningMessage = compliance.warningMessage
+            showRegulationWarning = true // Triggers the alert
+        } else {
+            finalizeSave() // Proceed directly if legal or unregulated
+        }
+    }
+    
+    // MARK: - Final Data Persistence
+    private func finalizeSave() {
+        let trimmedLength = length.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedWeight = weight.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let formattedLength = trimmedLength.isEmpty ? "Not provided" : "\(trimmedLength) \(lengthUnit)"
+        let formattedWeight = trimmedWeight.isEmpty ? "Not provided" : "\(trimmedWeight) \(weightUnit)"
         
         let newCatch = CatchRecord(
-            speciesName: speciesName.trimmingCharacters(
-                in: .whitespacesAndNewlines
-            ),
+            speciesName: speciesName.trimmingCharacters(in: .whitespacesAndNewlines),
             length: formattedLength,
             weight: formattedWeight,
-            location: location.trimmingCharacters(
-                in: .whitespacesAndNewlines
-            ),
+            location: location.trimmingCharacters(in: .whitespacesAndNewlines),
             date: Date(),
-            notes: notes.trimmingCharacters(
-                in: .whitespacesAndNewlines
-            ),
+            notes: notes.trimmingCharacters(in: .whitespacesAndNewlines),
             imageData: selectedImageData
         )
         
@@ -186,38 +204,19 @@ struct AddCatchView: View {
     }
     
     private func loadSelectedPhoto() async {
-        guard let selectedPhotoItem else {
-            return
-        }
+        guard let selectedPhotoItem else { return }
         
         isLoadingPhoto = true
-        
-        defer {
-            isLoadingPhoto = false
-        }
+        defer { isLoadingPhoto = false }
         
         do {
-            guard let originalData =
-                    try await selectedPhotoItem.loadTransferable(
-                        type: Data.self
-                    ),
-                  let originalImage = UIImage(data: originalData) else {
-                return
-            }
+            guard let originalData = try await selectedPhotoItem.loadTransferable(type: Data.self),
+                  let originalImage = UIImage(data: originalData) else { return }
             
-            let resizedImage =
-                originalImage.preparingThumbnail(
-                    of: CGSize(width: 1200, height: 1200)
-                ) ?? originalImage
-            
-            selectedImageData = resizedImage.jpegData(
-                compressionQuality: 0.75
-            )
+            let resizedImage = originalImage.preparingThumbnail(of: CGSize(width: 1200, height: 1200)) ?? originalImage
+            selectedImageData = resizedImage.jpegData(compressionQuality: 0.75)
         } catch {
-            print(
-                "Unable to load selected photo: \(error.localizedDescription)"
-            )
-            
+            print("Unable to load selected photo: \(error.localizedDescription)")
             selectedImageData = nil
         }
     }

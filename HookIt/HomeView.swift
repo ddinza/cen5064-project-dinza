@@ -124,7 +124,7 @@ struct HomeView: View {
                 .buttonStyle(.borderedProminent)
 
             case .authorizedWhenInUse, .authorizedAlways:
-                HStack(spacing: 0) {
+                HStack(alignment: .top, spacing: 0) {
                     weatherConditionView
 
                     Divider()
@@ -231,6 +231,8 @@ struct HomeView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            
+            Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity)
     }
@@ -287,6 +289,7 @@ struct HomeView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity)
     }
@@ -302,17 +305,19 @@ struct HomeView: View {
             Image(systemName: icon)
                 .font(.title2)
                 .foregroundStyle(.blue)
-
+            
             Text(title)
                 .font(.caption)
                 .fontWeight(.semibold)
-
+            
             Text(value)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
+            Spacer(minLength: 0)
         }
+        
         .frame(maxWidth: .infinity)
     }
 
