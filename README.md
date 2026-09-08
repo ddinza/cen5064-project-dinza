@@ -14,7 +14,7 @@
 
 Prerequisites: This is a native iOS application. You must use a Mac with Xcode installed to compile and run this project.
 
-   **Clone the repository:**
+   1) **Clone the repository:**
    ```bash
    git clone https://github.com/ddinza/cen5064-project-dinza.git
 cd cen5064-project-dinza
