@@ -52,7 +52,7 @@ Note: When the app launches, be sure to grant Location permissions so the home s
 ### C4 — Context & Container (Session 3 studio)
 
 ```mermaid
-```mermaid
+
 %% HookIt Context Diagram
 flowchart TB
     user([Angler]) -->|uses| system[HookIt System]
