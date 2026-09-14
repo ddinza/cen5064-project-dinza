@@ -56,7 +56,8 @@ Note: When the app launches, be sure to grant Location permissions so the home s
 %% HookIt Context Diagram
 flowchart TB
     user([Angler]) -->|uses| system[HookIt System]
-    system -->|stores data in| db[(Local Device Storage)]
+    system -->|fetches weather & tide data from| noaa[(NOAA API)]
+    system -->|stores data in| db[(Database)]
 ```
 
 ```mermaid
@@ -64,8 +65,8 @@ flowchart TB
 flowchart TB
     subgraph HookItSystem [HookIt System]
         ui[SwiftUI Views<br/>Presentation] --> api[CatchManager<br/>Application / Service]
-        api --> domain[Fishing & Weather Rules<br/>Domain Model]
-        domain --> db[(Device Storage<br/>Data tier)]
+        api --> domain[Fishing Rules<br/>Domain Model]
+        domain --> db[(Database<br/>Data tier)]
     end
 ```
 
@@ -106,13 +107,13 @@ sequenceDiagram
     participant UI as SwiftUI
     participant S as CatchManager
     participant Dom as Domain Logic
-    participant D as Data Storage
+    participant D as Data Tier
     
     U->>UI: Submit catch data
     UI->>S: handleNewCatch(request)
     S->>Dom: validateCatchRules(request)
     Dom-->>S: validation success
-    S->>D: saveToLocalStorage(catch)
+    S->>D: save(catch)
     D-->>S: confirm save
     S-->>UI: update dashboard state
     UI-->>U: Show success confirmation
