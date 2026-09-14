@@ -52,47 +52,70 @@ Note: When the app launches, be sure to grant Location permissions so the home s
 ### C4 — Context & Container (Session 3 studio)
 
 ```mermaid
-%% Replace this placeholder with YOUR system's context diagram.
+```mermaid
+%% HookIt Context Diagram
 flowchart TB
-    user([User]) -->|uses| system[Your System]
-    system -->|stores data in| db[(Database)]
+    user([Angler]) -->|uses| system[HookIt System]
+    system -->|stores data in| db[(Local Device Storage)]
 ```
 
 ```mermaid
-%% Container view: your containers should match the tier table above.
+%% Container view matching the 4-tier architecture
 flowchart TB
-    subgraph YourSystem [Your System]
-        ui[Web UI / CLI<br/>Presentation] --> api[Application / Service]
-        api --> domain[Domain Model]
-        domain --> db[(Database<br/>Data tier)]
+    subgraph HookItSystem [HookIt System]
+        ui[SwiftUI Views<br/>Presentation] --> api[CatchManager<br/>Application / Service]
+        api --> domain[Fishing & Weather Rules<br/>Domain Model]
+        domain --> db[(Device Storage<br/>Data tier)]
     end
 ```
 
 ### UML — Class & Sequence (Session 3 studio)
 
 ```mermaid
-%% Class diagram: your 3–4 core domain classes.
+%% Class diagram: Core domain classes for HookIt
 classDiagram
-    class ExampleEntity {
-        -id: Long
-        -name: String
-        +doSomething()
+    class Catch {
+        -id: UUID
+        -speciesName: String
+        -weight: Double
+        -dateCaught: Date
+        +formatCatchDetails() String
     }
+    
+    class FishingCondition {
+        -temperature: Double
+        -tideStatus: String
+        -moonPhase: String
+        +isFavorable() Bool
+    }
+    
+    class CatchManager {
+        -loggedCatches: List
+        +saveCatch(c: Catch) Bool
+        +retrieveAllCatches() List
+    }
+    
+    CatchManager "1" --> "*" Catch : manages
+    FishingCondition ..> Catch : context
 ```
 
 ```mermaid
-%% Sequence diagram: ONE core use case, end to end.
+%% Sequence diagram: Core use case - Logging a Catch
 sequenceDiagram
-    actor U as User
-    participant UI
-    participant S as Service
-    participant D as Data
-    U->>UI: action
-    UI->>S: request
-    S->>D: save/load
-    D-->>S: result
-    S-->>UI: response
-    UI-->>U: confirmation
+    actor U as Angler
+    participant UI as SwiftUI
+    participant S as CatchManager
+    participant Dom as Domain Logic
+    participant D as Data Storage
+    
+    U->>UI: Submit catch data
+    UI->>S: handleNewCatch(request)
+    S->>Dom: validateCatchRules(request)
+    Dom-->>S: validation success
+    S->>D: saveToLocalStorage(catch)
+    D-->>S: confirm save
+    S-->>UI: update dashboard state
+    UI-->>U: Show success confirmation
 ```
 
 ## Architecture Decision Records
