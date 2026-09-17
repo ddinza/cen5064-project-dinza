@@ -63,7 +63,7 @@ struct RegulationDetailView: View {
         }
         .navigationTitle("Regulations")
         .safeAreaInset(edge: .bottom) {
-                    Color.clear.frame(height: 90)
+                    Color.clear.frame(height: 90) 
                 }
     }
 }
@@ -104,6 +104,6 @@ struct SpeciesGuideLinkButton: View {
             season: "Seasonal closures apply",
             notes: "Snook permit required for harvest. Always verify current FWC regulations."
         )
-       
+        .environmentObject(FavoritesManager())
     }
 }

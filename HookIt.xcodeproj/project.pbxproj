@@ -400,6 +400,7 @@
 				DEVELOPMENT_TEAM = F5JJ8GN9WP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Hookit SE";
 				INFOPLIST_KEY_NSCameraUsageDescription = "HookIt uses the camera to take photos of your catches for Quick Catch.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "HookIt uses your location to show local weather, tides, and fishing conditions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -412,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dinza.HookIt.SEDClass;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dinza.HookIt-Class";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -434,6 +435,7 @@
 				DEVELOPMENT_TEAM = F5JJ8GN9WP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Hookit SE";
 				INFOPLIST_KEY_NSCameraUsageDescription = "HookIt uses the camera to take photos of your catches for Quick Catch.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "HookIt uses your location to show local weather, tides, and fishing conditions.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -446,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dinza.HookIt.SEDClass;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dinza.HookIt-Class";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;

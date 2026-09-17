@@ -1,3 +1,4 @@
+
 # --- Java ---
 target/
 build/
@@ -28,3 +29,4 @@ Thumbs.db
 *.local
 HookIt/Secrets.plist
 secrets.plist
+Secrets.plist

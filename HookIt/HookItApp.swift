@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct HookItApp: App {
+    @StateObject private var favoritesManager = FavoritesManager()
     @StateObject private var catchManager = CatchManager()
     
     var body: some Scene {
         WindowGroup {
             SplashView()
+                .environmentObject(favoritesManager)
                 .environmentObject(catchManager)
         }
     }
