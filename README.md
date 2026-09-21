@@ -134,3 +134,5 @@ A one-line note per week keeps your commit story readable:
 - Week 1 (Aug 24): repo created, HookIt core architecture and AI Vision integration drafted
 - Week 2 (Aug 31): implemented local offline services, regulations data provider, and domain-tier validation rule
 - Week 3 (Sep 7): finalized 4-feature scope constraint, integrated compliance engine alerts into catch logging, and resolved UI layout alignments
+
+- Working on: Add CI pipeline for macOS runner
