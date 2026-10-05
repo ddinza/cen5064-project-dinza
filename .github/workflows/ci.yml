@@ -1,0 +1,30 @@
+# CEN 5064 — CI for the iOS track (HookIt)
+# Save this file to .github/workflows/ci.yml
+
+name: iOS CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    # iOS apps must be built on macOS, not ubuntu-latest
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Build HookIt
+        # Uses Xcode's command line tools to compile the project.
+        # Code signing is disabled because this is an automated test environment.
+        run: |
+          xcodebuild clean build \
+            -project HookIt.xcodeproj \
+            -scheme HookIt \
+            -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
