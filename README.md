@@ -6,9 +6,9 @@
 
 **Student:** Dionny Dinza · **Course:** CEN 5064 Software Design, Fall 2026 · **Partner:** [@lfriera92]
 
-## Project (approval paragraph — write this by Sun Aug 30)
+## Project (approval paragraph)
 
- HookIt is a native iOS application designed for recreational anglers to digitally log their catches while automatically ensuring compliance with local fishing regulations. To maintain a strict scope and clear architectural tiers, the system focuses on four core features: (1) an AI Fish Identification tool, the single permitted external API integration, that analyzes an uploaded photo to identify the species; (2) a Catch Logger where users record their harvest details (species, length, date); (3) a Static Regulations Database built directly into the app containing regional size limits and open seasons, eliminating the need for live weather or tide APIs; and (4) a Compliance Engine (Domain Rule) that automatically cross-references every logged catch against the static database to instantly warn the user if a fish is undersized or out of season.
+ HookIt is a native iOS application designed for recreational anglers to digitally log their catches while automatically ensuring compliance with local fishing regulations. To maintain a strict scope and clear architectural tiers, the system focuses on four core features: (1) an AI Fish Identification tool, the single permitted external API integration, that analyzes an uploaded photo to identify the species; (2) a Catch Logger where users record their harvest details (species, length, date); (3) a Live Fishing Conditions integration that fetches real-time tide data from the NOAA API based on the user's current GPS coordinates; and (4) a Compliance Engine (Domain Rule) that automatically cross-references every logged catch against the static database to instantly warn the user if a fish is undersized or out of season.
 
 ## How to run
 
@@ -45,7 +45,7 @@ Note: When the app launches, be sure to grant Location permissions so the home s
 | Tier | Responsibilities in THIS system |Example Classes/Modules|
 |------|--------------------------------|----------------------------|
 | Presentation | Displays the user interface, shows logged catches, collects input for new catches, and alerts the user of regulation violations. |HomeView, AddCatchView, IdentifyItView|
-| Service | Orchestrates app workflows, such as handling a new catch photo and securely calling the AI vision integration for identification. |GeminiService|
+| Service | Orchestrates app workflows, such as handling a new catch photo and securely calling the AI vision integration for identification. |GeminiService, TideService, NOAAResponseDecoder|
 | Domain | Defines core fishing entities and enforces the main business rule: validating whether a logged catch violates the static size or season limits for that specific species. |RegulationValidator, ComplianceStatus, FishSpecies|
 | Data | Handles the local, on-device storage of user catch history as well as loading the static dataset of fishing regulations. |CatchManager, RegulationData|
 
@@ -134,3 +134,5 @@ A one-line note per week keeps your commit story readable:
 - Week 1 (Aug 24): repo created, HookIt core architecture and AI Vision integration drafted
 - Week 2 (Aug 31): implemented local offline services, regulations data provider, and domain-tier validation rule
 - Week 3 (Sep 7): finalized 4-feature scope constraint, integrated compliance engine alerts into catch logging, and resolved UI layout alignments
+- Week 4-5 (Sep/Oct): Implemented NOAAResponseDecoder and live URLSession network fetches for real-time tide data.
+- Week 6 (Oct): Refactored UI to remove glassmorphism, restoring solid cards and SF Symbols for conference day presentation.
