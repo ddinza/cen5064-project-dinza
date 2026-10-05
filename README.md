@@ -57,17 +57,22 @@ Note: When the app launches, be sure to grant Location permissions so the home s
 flowchart TB
     user([Angler]) -->|uses| system[HookIt System]
     system -->|fetches weather & tide data from| noaa[(NOAA API)]
-    system -->|stores data in| db[(Database)]
+    system -->|sends photos for AI identification to| gemini[(Gemini API)]
+    system -->|stores data in| db[(Local Database)]
 ```
 
 ```mermaid
 %% Container view matching the 4-tier architecture
 flowchart TB
     subgraph HookItSystem [HookIt System]
-        ui[SwiftUI Views<br/>Presentation] --> api[CatchManager<br/>Application / Service]
-        api --> domain[Fishing Rules<br/>Domain Model]
+        ui[SwiftUI Views<br/>Presentation] --> appService[CatchManager<br/>Application / Service]
+        ui --> netService[Network Services<br/>TideService & GeminiService]
+        appService --> domain[Fishing Rules<br/>Domain Model]
         domain --> db[(Database<br/>Data tier)]
     end
+    
+    netService -->|Live tide data| noaa[(NOAA API)]
+    netService -->|Image analysis| gemini[(Gemini API)]
 ```
 
 ### UML — Class & Sequence (Session 3 studio)
