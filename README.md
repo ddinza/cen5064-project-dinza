@@ -13,10 +13,10 @@
 ## How to run
 
 Prerequisites: This is a native iOS application. You must use a Mac with Xcode installed to compile and run this project.
-
-   1) **Clone the repository:**
-   ```bash
-   git clone https://github.com/ddinza/cen5064-project-dinza.git
+```bash
+1) **Clone the repository:**
+   
+git clone https://github.com/ddinza/cen5064-project-dinza.git
 cd cen5064-project-dinza
    
 2) Add the API Key (Required for AI Vision):
@@ -35,6 +35,9 @@ Select an iPhone Simulator (e.g., iPhone 17 Pro Max) from the top destination me
 Hit the Play/Run button (Cmd + R).
 
 Note: When the app launches, be sure to grant Location permissions so the home screen UI can properly display the simulated fishing conditions.
+
+Testing Note: Location Services & Fishing Conditions
+To see the correct local fishing conditions (Weather and Tides), the app must be run on a physical iPhone with active GPS. If you are grading this using the Xcode Simulator, the conditions may be blank when clicking "Enable Location".
 
 ```
 
