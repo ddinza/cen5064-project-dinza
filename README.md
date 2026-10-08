@@ -1,5 +1,7 @@
 # HookIt
 
+[![iOS CI](https://github.com/ddinza/cen5064-project-dinza/actions/workflows/ci.yml/badge.svg)](https://github.com/ddinza/cen5064-project-dinza/actions/workflows/ci.yml)
+
 <!-- CI badge: after Session 4, replace ORG/REPO and the workflow filename, then uncomment:
 ![CI](https://github.com/ORG/REPO/actions/workflows/ci.yml/badge.svg)
 -->
