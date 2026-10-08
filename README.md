@@ -146,3 +146,4 @@ A one-line note per week keeps your commit story readable:
 - Week 3 (Sep 7): finalized 4-feature scope constraint, integrated compliance engine alerts into catch logging, and resolved UI layout alignments
 - Week 4-5 (Sep/Oct): Implemented NOAAResponseDecoder and live URLSession network fetches for real-time tide data.
 - Week 6 (Oct): Refactored UI to remove glassmorphism, restoring solid cards and SF Symbols for conference day presentation.
+- Week 7 (Oct): Added CI pipeline for macOS runner to automate Xcode builds and ensure repository stability.
