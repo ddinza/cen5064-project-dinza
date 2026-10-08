@@ -55,7 +55,7 @@ private struct AppNavigationBar: View {
             if selectedSection != .home {
                 navigationButton(
                     title: "Home",
-                    imageName: "hookitlogo",
+                    systemImage: "house.fill",
                     section: .home
                 )
             }
@@ -63,7 +63,7 @@ private struct AppNavigationBar: View {
             if selectedSection != .species {
                 navigationButton(
                     title: "Species",
-                    imageName: "speciesguide",
+                    systemImage: "fish.fill",
                     section: .species
                 )
             }
@@ -71,7 +71,7 @@ private struct AppNavigationBar: View {
             if selectedSection != .catches {
                 navigationButton(
                     title: "Catches",
-                    imageName: "mycatches",
+                    systemImage: "figure.fishing",
                     section: .catches
                 )
             }
@@ -79,40 +79,33 @@ private struct AppNavigationBar: View {
             if selectedSection != .regulations {
                 navigationButton(
                     title: "Regulations",
-                    imageName: "regulations",
+                    systemImage: "ruler.fill",
                     section: .regulations
                 )
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal)
-        .padding(.vertical, 10)
+        // Floating Island Modifiers
+        .padding(.horizontal, 8)
+        .padding(.vertical, 12)
         .background(.ultraThinMaterial)
+        .clipShape(Capsule())
+        .shadow(color: .black.opacity(0.15), radius: 12, x: 0, y: 6)
+        .padding(.horizontal, 24)
+        .padding(.bottom, 8)
     }
 
     private func navigationButton(
         title: String,
-        imageName: String,
+        systemImage: String,
         section: AppSection
     ) -> some View {
         Button {
             selectedSection = section
         } label: {
-            VStack(spacing: 4) {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(
-                        width: section == .home ? 56 : 76,
-                        height: section == .home ? 56 : 52
-                    )
-                    .clipShape(
-                        RoundedRectangle(
-                            cornerRadius: section == .home ? 13 : 12,
-                            style: .continuous
-                        )
-                    )
-                    .clipped()
+            VStack(spacing: 6) {
+                Image(systemName: systemImage)
+                    .font(.title2)
+                    .foregroundStyle(.primary)
 
                 Text(title)
                     .font(.caption2)
