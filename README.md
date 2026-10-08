@@ -80,54 +80,11 @@ flowchart TB
     netService -->|Image analysis| gemini[(Gemini API)]
 ```
 
-### UML — Class & Sequence 
+### UML Class Diagram
+![UML Class Diagram](HookIt_UML_Class_Diagram.png)
 
-```mermaid
-%% Class diagram: Core domain classes for HookIt
-classDiagram
-    class Catch {
-        -id: UUID
-        -speciesName: String
-        -weight: Double
-        -dateCaught: Date
-        +formatCatchDetails() String
-    }
-    
-    class FishingCondition {
-        -temperature: Double
-        -tideStatus: String
-        -moonPhase: String
-        +isFavorable() Bool
-    }
-    
-    class CatchManager {
-        -loggedCatches: List
-        +saveCatch(c: Catch) Bool
-        +retrieveAllCatches() List
-    }
-    
-    CatchManager "1" --> "*" Catch : manages
-    FishingCondition ..> Catch : context
-```
-
-```mermaid
-%% Sequence diagram: Core use case - Logging a Catch
-sequenceDiagram
-    actor U as Angler
-    participant UI as SwiftUI
-    participant S as CatchManager
-    participant Dom as Domain Logic
-    participant D as Data Tier
-    
-    U->>UI: Submit catch data
-    UI->>S: handleNewCatch(request)
-    S->>Dom: validateCatchRules(request)
-    Dom-->>S: validation success
-    S->>D: save(catch)
-    D-->>S: confirm save
-    S-->>UI: update dashboard state
-    UI-->>U: Show success confirmation
-```
+### Sequence Diagram
+![Sequence Diagram](HookIt_Sequence_Diagram.png)
 
 ## Architecture Decision Records
 
