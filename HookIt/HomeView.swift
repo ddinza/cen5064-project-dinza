@@ -289,6 +289,7 @@ struct HomeView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity)
@@ -305,19 +306,19 @@ struct HomeView: View {
             Image(systemName: icon)
                 .font(.title2)
                 .foregroundStyle(.blue)
-            
+
             Text(title)
                 .font(.caption)
                 .fontWeight(.semibold)
-            
+
             Text(value)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
+            
             Spacer(minLength: 0)
         }
-        
         .frame(maxWidth: .infinity)
     }
 
