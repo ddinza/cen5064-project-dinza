@@ -8,7 +8,7 @@
 
 **Student:** Dionny Dinza · **Course:** CEN 5064 Software Design, Fall 2026 · **Partner:** [@lfriera92]
 
-## Project (approval paragraph)
+## Project 
 
  HookIt is a native iOS application designed for recreational anglers to digitally log their catches while automatically ensuring compliance with local fishing regulations. To maintain a strict scope and clear architectural tiers, the system focuses on four core features: (1) an AI Fish Identification tool, the single permitted external API integration, that analyzes an uploaded photo to identify the species; (2) a Catch Logger where users record their harvest details (species, length, date); (3) a Live Fishing Conditions integration that fetches real-time tide data from the NOAA API based on the user's current GPS coordinates; and (4) a Compliance Engine (Domain Rule) that automatically cross-references every logged catch against the static database to instantly warn the user if a fish is undersized or out of season.
 
@@ -45,7 +45,7 @@ To see the correct local fishing conditions (Weather and Tides), the app must be
 
 ## Architecture
 
-### Tier breakdown (Session 2 studio)
+### Tier breakdown 
 
 | Tier | Responsibilities in THIS system |Example Classes/Modules|
 |------|--------------------------------|----------------------------|
@@ -54,7 +54,7 @@ To see the correct local fishing conditions (Weather and Tides), the app must be
 | Domain | Defines core fishing entities and enforces the main business rule: validating whether a logged catch violates the static size or season limits for that specific species. |RegulationValidator, ComplianceStatus, FishSpecies|
 | Data | Handles the local, on-device storage of user catch history as well as loading the static dataset of fishing regulations. |CatchManager, RegulationData|
 
-### C4 — Context & Container (Session 3 studio)
+### C4 — Context & Container 
 
 ```mermaid
 
@@ -80,7 +80,7 @@ flowchart TB
     netService -->|Image analysis| gemini[(Gemini API)]
 ```
 
-### UML — Class & Sequence (Session 3 studio)
+### UML — Class & Sequence 
 
 ```mermaid
 %% Class diagram: Core domain classes for HookIt
@@ -139,7 +139,7 @@ Decisions live in [`docs/adr/`](docs/adr/). Start with ADR-001 in Session 4.
 | [002](docs/adr/adr-002.md) | Use Local On-Device Database for Catch and Regulation Storage | accepted |
 | [003](docs/adr/adr-003.md) | Implement Custom macOS CI Pipeline via GitHub Actions | accepted |
 
-## Weekly log (optional but recommended)
+## Weekly log 
 
 A one-line note per week keeps your commit story readable:
 
