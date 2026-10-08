@@ -23,11 +23,34 @@ cd cen5064-project-dinza
    
 2) Add the API Key (Required for AI Vision):
 
+Method 1:
 Obtain the secrets.plist file from the provided USB drive.
 
 Drag and drop the secrets.plist file directly into the HookIt folder inside your newly cloned repository (it should sit in the same folder as the HookIt.xcodeproj file).
 
 (Note: This file contains the private Gemini API key and is intentionally kept out of version control for security).
+
+Method 2:
+Configure API Secrets (Required for Gemini AI Vision)
+
+For security best practices, `secrets.plist` is excluded from version control via `.gitignore`.
+
+Quick Terminal Setup (Recommended)
+Run the following command from the root of the repository to generate the file automatically. Replace `PASTE_API_KEY_HERE` with the Gemini API key (your own Google AI Studio key):
+
+```bash
+cat <<EOF> HookIt/secrets.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "[http://www.apple.com/DTDs/PropertyList-1.0.dtd](http://www.apple.com/DTDs/PropertyList-1.0.dtd)">
+<plist version="1.0">
+<dict>
+    <key>GEMINI_API_KEY</key>
+    <string>PASTE_API_KEY_HERE</string>
+</dict>
+</plist>
+EOF
+
+
 
 3) Build and Run:
 Open HookIt.xcodeproj in Xcode.
