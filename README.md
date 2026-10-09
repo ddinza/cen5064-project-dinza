@@ -20,7 +20,7 @@
 ```bash
 1. Clone the Repository
 
-git clone [https://github.com/ddinza/cen5064-project-dinza.git](https://github.com/ddinza/cen5064-project-dinza.git)
+git clone https://github.com/ddinza/cen5064-project-dinza.git
 cd cen5064-project-dinza
    
 2. Configure API Secrets (Required for Gemini AI Vision)
