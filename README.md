@@ -12,33 +12,21 @@
 
  HookIt is a native iOS application designed for recreational anglers to digitally log their catches while automatically ensuring compliance with local fishing regulations. To maintain a strict scope and clear architectural tiers, the system focuses on four core features: (1) an AI Fish Identification tool, the single permitted external API integration, that analyzes an uploaded photo to identify the species; (2) a Catch Logger where users record their harvest details (species, length, date); (3) a Live Fishing Conditions integration that fetches real-time tide data from the NOAA API based on the user's current GPS coordinates; and (4) a Compliance Engine (Domain Rule) that automatically cross-references every logged catch against the static database to instantly warn the user if a fish is undersized or out of season.
 
-## How to run
+## How to Run
 
-Prerequisites: This is a native iOS application. You must use a Mac with Xcode installed to compile and run this project.
+**Prerequisites:** A Mac with Xcode installed.
+
+### 1. Clone the Repository
 ```bash
-1) **Clone the repository:**
-   
-git clone https://github.com/ddinza/cen5064-project-dinza.git
+git clone [https://github.com/ddinza/cen5064-project-dinza.git](https://github.com/ddinza/cen5064-project-dinza.git)
 cd cen5064-project-dinza
    
-2) Add the API Key (Required for AI Vision):
+2. Configure API Secrets (Required for Gemini AI Vision)
+For security best practices, secrets.plist is excluded from version control via .gitignore. Configure the key using either method below:
 
-Method 1:
-Obtain the secrets.plist file from the provided USB drive.
+Option A: Quick Terminal Setup (Recommended)
+Run the following command from the repository root, replacing PASTE_API_KEY_HERE with your Gemini API key (e.g., from Google AI Studio):
 
-Drag and drop the secrets.plist file directly into the HookIt folder inside your newly cloned repository (it should sit in the same folder as the HookIt.xcodeproj file).
-
-(Note: This file contains the private Gemini API key and is intentionally kept out of version control for security).
-
-Method 2:
-Configure API Secrets (Required for Gemini AI Vision)
-
-For security best practices, `secrets.plist` is excluded from version control via `.gitignore`.
-
-Quick Terminal Setup (Recommended)
-Run the following command from the root of the repository to generate the file automatically. Replace `PASTE_API_KEY_HERE` with the Gemini API key (your own Google AI Studio key):
-
-```bash
 cat <<EOF> HookIt/secrets.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "[http://www.apple.com/DTDs/PropertyList-1.0.dtd](http://www.apple.com/DTDs/PropertyList-1.0.dtd)">
@@ -50,16 +38,21 @@ cat <<EOF> HookIt/secrets.plist
 </plist>
 EOF
 
+Option B: Manual File Placement
+If using the pre-configured secrets.plist file from the provided USB drive:
 
+Copy secrets.plist.
 
-3) Build and Run:
+Place it inside the HookIt folder (in the same directory as HookIt.xcodeproj).
+
+3. Build and Run
 Open HookIt.xcodeproj in Xcode.
 
-Select an iPhone Simulator (e.g., iPhone 17 Pro Max) from the top destination menu.
+Select an iPhone Simulator (e.g., iPhone 16 Pro or iPhone 17 Pro Max) from the top destination menu.
 
-Hit the Play/Run button (Cmd + R).
+Press Cmd + R (or click the Play button) to build and run.
 
-Note: When the app launches, be sure to grant Location permissions so the home screen UI can properly display the simulated fishing conditions.
+When prompted on initial launch, grant Location permissions so the dashboard can load local fishing conditions.
 
 Testing Note: Location Services & Fishing Conditions
 To see the correct local fishing conditions (Weather and Tides), the app must be run on a physical iPhone with active GPS. If you are grading this using the Xcode Simulator, the conditions may be blank when clicking "Enable Location".
