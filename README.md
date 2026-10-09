@@ -16,8 +16,10 @@
 
 **Prerequisites:** A Mac with Xcode installed.
 
-### 1. Clone the Repository
+
 ```bash
+### 1. Clone the Repository
+
 git clone [https://github.com/ddinza/cen5064-project-dinza.git](https://github.com/ddinza/cen5064-project-dinza.git)
 cd cen5064-project-dinza
    
