@@ -172,8 +172,8 @@ struct AddCatchView: View {
         let compliance = RegulationValidator.validate(speciesName: cleanSpecies, lengthInches: lengthInInches)
         
         if compliance.isViolation {
-            warningTitle = compliance.warningTitle
-            warningMessage = compliance.warningMessage
+            warningTitle = ComplianceUIFormatter.warningTitle(for: compliance)
+            warningMessage = ComplianceUIFormatter.warningMessage(for: compliance)
             showRegulationWarning = true // Triggers the alert
         } else {
             finalizeSave() // Proceed directly if legal or unregulated

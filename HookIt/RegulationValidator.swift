@@ -13,8 +13,20 @@ public enum ComplianceStatus: Equatable {
     case seasonClosed(season: String)
     case unregulated
     
-    public var warningTitle: String {
+    public var isViolation: Bool {
         switch self {
+        case .undersized, .oversized, .seasonClosed:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+public struct ComplianceUIFormatter {
+    
+    public static func warningTitle(for status: ComplianceStatus) -> String {
+        switch status {
         case .legal:
             return "Compliant Catch"
         case .undersized:
@@ -28,8 +40,8 @@ public enum ComplianceStatus: Equatable {
         }
     }
     
-    public var warningMessage: String {
-        switch self {
+    public static func warningMessage(for status: ComplianceStatus) -> String {
+        switch status {
         case .legal:
             return "This catch meets legal size requirements."
         case .undersized(let min, let recorded):
@@ -40,15 +52,6 @@ public enum ComplianceStatus: Equatable {
             return "Harvest is currently prohibited. Open season: \(season)."
         case .unregulated:
             return "No specific slot size restrictions documented for this species."
-        }
-    }
-    
-    public var isViolation: Bool {
-        switch self {
-        case .undersized, .oversized, .seasonClosed:
-            return true
-        default:
-            return false
         }
     }
 }
