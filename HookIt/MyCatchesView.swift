@@ -176,6 +176,6 @@ struct MyCatchesView: View {
 #Preview {
     NavigationStack {
         MyCatchesView()
-            .environmentObject(CatchManager())
+            .environmentObject(CatchManager.shared)
     }
 }

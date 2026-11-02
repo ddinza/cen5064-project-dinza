@@ -479,5 +479,5 @@ private struct HomeCardLayout: View {
 
 #Preview {
     HomeView()
-        .environmentObject(CatchManager())
+        .environmentObject(CatchManager.shared)
 }

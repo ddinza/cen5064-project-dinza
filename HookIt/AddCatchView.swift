@@ -224,5 +224,5 @@ struct AddCatchView: View {
 
 #Preview {
     AddCatchView()
-        .environmentObject(CatchManager())
+        .environmentObject(CatchManager.shared)
 }
