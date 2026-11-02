@@ -74,20 +74,47 @@ public struct RegulationValidator {
             }
         }
         
-        // 2. Check Season Closure
-        let seasonText = reg.season.lowercased()
-        if seasonText.contains("closed") && !seasonText.contains("open year-round") {
+        // 2. Check Season Closure using the actual date parameter
+        if isSeasonClosed(seasonText: reg.season, catchDate: date) {
             return .seasonClosed(season: reg.season)
         }
         
         return .legal
     }
     
+    /// Determines if the season is closed on the specific catch date
+    private static func isSeasonClosed(seasonText: String, catchDate: Date) -> Bool {
+        let text = seasonText.lowercased()
+        if text.contains("open year-round") { return false }
+        if text == "closed" { return true }
+        
+        // Extract the month from the provided catch date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM" // e.g., "October"
+        let fullMonth = formatter.string(from: catchDate).lowercased()
+        
+        formatter.dateFormat = "MMM" // e.g., "Oct"
+        let shortMonth = formatter.string(from: catchDate).lowercased()
+        
+        // Example check: if the regulation explicitly lists the catch month as closed
+        if text.contains("closed") && (text.contains(fullMonth) || text.contains(shortMonth)) {
+            return true
+        }
+        
+        // Example check: if the regulation lists open months, but the catch month is not among them
+        if text.contains("open") && !text.contains("year-round") {
+            if !text.contains(fullMonth) && !text.contains(shortMonth) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     /// Parses numerical min and max thresholds from strings like '28"–32"' or 'Min 14"'
     private static func parseSlotLimit(from rawString: String) -> (min: Double?, max: Double?)? {
         let clean = rawString.replacingOccurrences(of: "\"", with: "").trimmingCharacters(in: .whitespaces)
         
-        // Check for range (e.g. 28-32 or 28–32)
         let separators = CharacterSet(charactersIn: "-–")
         let components = clean.components(separatedBy: separators)
         
@@ -97,7 +124,6 @@ public struct RegulationValidator {
             return (min: minVal, max: maxVal)
         }
         
-        // Check for minimums (e.g. "Min 14" or "14" min")
         let numbers = clean.components(separatedBy: CharacterSet.decimalDigits.inverted)
             .compactMap { Double($0) }
         
