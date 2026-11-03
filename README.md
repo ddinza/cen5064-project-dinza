@@ -87,10 +87,9 @@ flowchart TB
 %% Container view matching the 4-tier architecture
 flowchart TB
     subgraph HookItSystem [HookIt System]
-        ui[SwiftUI Views<br/>Presentation] --> appService[CatchManager<br/>Application / Service]
+        ui[SwiftUI Views<br/>Presentation] --> domain[RegulationValidator<br/>Domain Tier]
+        ui --> db[CatchManager / UserDefaults<br/>Data Tier]
         ui --> netService[Network Services<br/>TideService & GeminiService]
-        appService --> domain[Fishing Rules<br/>Domain Model]
-        domain --> db[(Database<br/>Data tier)]
     end
     
     netService -->|Live tide data| noaa[(NOAA API)]
