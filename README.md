@@ -81,7 +81,6 @@ flowchart TB
     user([Angler]) -->|uses| system[HookIt System]
     system -->|fetches weather & tide data from| noaa[(NOAA API)]
     system -->|sends photos for AI identification to| gemini[(Gemini API)]
-    system -->|stores data in| db[(Local Database)]
 ```
 
 ```mermaid
