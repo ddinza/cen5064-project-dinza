@@ -100,7 +100,43 @@ flowchart TB
 ![UML Class Diagram](HookIt_UML_Class_Diagram.png)
 
 ### Sequence Diagram
-![Sequence Diagram](HookIt_Sequence_Diagram.png)
+
+```mermaid
+sequenceDiagram
+    actor Angler
+    participant IdentifyItView
+    participant GeminiService
+    participant IdentifyItResultView
+    participant RegulationValidator
+    participant RegulationData
+    participant CatchManager
+
+    Angler->>IdentifyItView: Uploads Catch Photo
+    IdentifyItView->>GeminiService: identifyFish(image)
+    activate GeminiService
+    GeminiService-->>IdentifyItView: returns "Red Snapper"
+    deactivate GeminiService
+    IdentifyItView->>IdentifyItResultView: Navigates to Result View
+    
+    IdentifyItResultView->>Angler: Prompts for length and date
+    Angler->>IdentifyItResultView: Submits 14 inches, current date
+    
+    IdentifyItResultView->>RegulationValidator: validate(speciesName, lengthInches, date)
+    activate RegulationValidator
+    RegulationValidator->>RegulationData: findRegulation(named: "Red Snapper")
+    activate RegulationData
+    RegulationData-->>RegulationValidator: returns size limits & season
+    deactivate RegulationData
+    RegulationValidator-->>IdentifyItResultView: returns ComplianceStatus.undersized
+    deactivate RegulationValidator
+    
+    IdentifyItResultView->>Angler: Displays "Warning: Fish is Undersized!"
+    
+    IdentifyItResultView->>CatchManager: CatchManager.shared.addCatch(catchRecord)
+    activate CatchManager
+    CatchManager-->>IdentifyItResultView: saves to UserDefaults
+    deactivate CatchManager
+```
 
 ## Architecture Decision Records
 
