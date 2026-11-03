@@ -97,7 +97,93 @@ flowchart TB
 ```
 
 ### UML Class Diagram
-![UML Class Diagram](HookIt_UML_Class_Diagram.png)
+
+```mermaid
+
+classDiagram
+    direction TB
+
+    %% Presentation Tier
+    class AppShellView {
+        +body: some View
+    }
+    class HomeView {
+        +locationManager: LocationManager
+        +catchManager: CatchManager
+        +loadWeather()
+        +loadTide()
+    }
+    class IdentifyItView {
+        +body: some View
+    }
+
+    %% Service Tier
+    class LocationManager {
+        +location: CLLocation
+        +authorizationStatus: CLAuthorizationStatus
+        +requestPermission()
+    }
+    class WeatherService {
+        +fetchCurrentWeather(for: CLLocation) CurrentWeather
+    }
+    class TideService {
+        +fetchNextTide(for: CLLocation) TideInfo
+    }
+    class GeminiService {
+        +identifyFish(image: UIImage) String
+    }
+
+    %% Domain Tier
+    class RegulationValidator {
+        +validate(speciesName: String, lengthInches: Double, date: Date) ComplianceStatus
+    }
+    class ComplianceStatus {
+        <<enumeration>>
+        compliant
+        undersized
+        outOfSeason
+    }
+    class RegulationData {
+        <<struct>>
+        +speciesName: String
+        +legalSizeLimit: Double
+        +openSeasonStart: Date
+        +openSeasonEnd: Date
+    }
+
+    %% Data Tier
+    class CatchManager {
+        <<Singleton>>
+        +shared: CatchManager$
+        -catches: [CatchRecord]
+        +addCatch(record: CatchRecord)
+    }
+    class CatchRecord {
+        <<struct>>
+        +id: UUID
+        +species: String
+        +length: Double
+        +date: Date
+    }
+
+    %% Relationships
+    AppShellView --> HomeView : displays
+    AppShellView --> IdentifyItView : displays
+    
+    HomeView --> LocationManager : observes
+    HomeView --> WeatherService : calls
+    HomeView --> TideService : calls
+    HomeView --> CatchManager : observes
+    
+    IdentifyItView --> GeminiService : calls
+    IdentifyItView --> RegulationValidator : validates via
+    IdentifyItView --> CatchManager : saves via
+    
+    RegulationValidator ..> ComplianceStatus : returns
+    RegulationValidator --> RegulationData : cross-references
+    CatchManager --> CatchRecord : manages
+
+```
 
 ### Sequence Diagram
 
