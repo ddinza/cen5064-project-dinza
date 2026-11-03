@@ -233,6 +233,7 @@ Decisions live in [`docs/adr/`](docs/adr/). Start with ADR-001 in Session 4.
 | [001](docs/adr/adr-001.md) | Use Native iOS (Swift/SwiftUI) instead of Cross-Platform | accepted |
 | [002](docs/adr/adr-002.md) | Use Local On-Device Database for Catch and Regulation Storage | accepted |
 | [003](docs/adr/adr-003.md) | Implement Custom macOS CI Pipeline via GitHub Actions | accepted |
+| [004](docs/adr/adr-004.md) | Insert Your ADR-004 Title Here | accepted |
 
 ## Weekly log 
 
@@ -244,3 +245,4 @@ A one-line note per week keeps your commit story readable:
 - Week 4-5 (Sep/Oct): Implemented NOAAResponseDecoder and live URLSession network fetches for real-time tide data.
 - Week 6 (Oct): Refactored UI to remove glassmorphism, restoring solid cards and SF Symbols for conference day presentation.
 - Week 7 (Oct): Added CI pipeline for macOS runner to automate Xcode builds and ensure repository stability.
+- Week 8 (Nov): Addressed midterm feedback by fixing date parameters in season validation, configuring the GitHub Project board, and aligning N-Tier, C4, and UML design documentation with the Swift codebase.
