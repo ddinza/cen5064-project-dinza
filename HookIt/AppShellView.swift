@@ -119,5 +119,5 @@ private struct AppNavigationBar: View {
 
 #Preview {
     AppShellView()
-        .environmentObject(CatchManager())
+        .environmentObject(CatchManager.shared)
 }

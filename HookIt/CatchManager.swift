@@ -10,6 +10,10 @@ import Combine
 import SwiftUI
 
 class CatchManager: ObservableObject {
+    
+    // 1. The static property that holds the ONE guaranteed instance
+    static let shared = CatchManager()
+    
     @Published var catches: [CatchRecord] = [] {
         didSet {
             saveCatches()
@@ -18,7 +22,8 @@ class CatchManager: ObservableObject {
     
     private let catchesKey = "savedCatches"
     
-    init() {
+    // 2. The explicitly private constructor to prevent "new" calls elsewhere
+    private init() {
         loadCatches()
     }
     
@@ -49,8 +54,8 @@ class CatchManager: ObservableObject {
     private func loadCatches() {
         if let data = UserDefaults.standard.data(forKey: catchesKey),
            let decoded = try? JSONDecoder().decode(
-                [CatchRecord].self,
-                from: data
+               [CatchRecord].self,
+               from: data
            ) {
             catches = decoded
         }

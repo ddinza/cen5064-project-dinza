@@ -275,5 +275,5 @@ struct EditCatchView: View {
             notes: "Caught during the incoming tide."
         )
     )
-    .environmentObject(CatchManager())
+    .environmentObject(CatchManager.shared)
 }

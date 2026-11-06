@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct HookItApp: App {
-    @StateObject private var catchManager = CatchManager()
+    @StateObject private var catchManager = CatchManager.shared
     
     var body: some Scene {
         WindowGroup {
